@@ -11,11 +11,16 @@ const PROWLARR_PASS = process.env.PROWLARR_PASS;
 app.get('/health', async (req, res) => {
   try {
     const response = await axios.get(PROWLARR_URL, {
-      auth: {
-        username: PROWLARR_USER,
-        password: PROWLARR_PASS
-      }
-    });
+  headers: {
+    'X-Api-Key': process.env.PROWLARR_API_KEY
+  }
+});
+    //const response = await axios.get(PROWLARR_URL, {
+      //auth: {
+        //#username: PROWLARR_USER,
+        //password: PROWLARR_PASS
+      //}
+    //});
     if (response.status === 200) {
       res.send('Prowlarr is OK');
     } else {
